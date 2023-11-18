@@ -918,8 +918,7 @@ alert( admin ); // "John"
 // }
 
 // let myBMW= new BMW('Green', '40mph', 'BMW');
-// console.log(myBMW.showInfo()); 
-
+// console.log(myBMW.showInfo());
 
 // document.getElementById("demo").innerHTML = "Hello World! ovie";
 
@@ -956,14 +955,14 @@ function printPersonInfo({ firstName, lastName, age, sex }) {
   console.log(`First Name: ${firstName}`);
   console.log(`Last Name: ${lastName}`);
   console.log(`Age: ${age}`);
-  console.log(`sex: ${sex}`)
+  console.log(`sex: ${sex}`);
 }
 
 const person = {
-  firstName: 'Cas',
-  lastName: 'Nuel',
+  firstName: "Cas",
+  lastName: "Nuel",
   age: 305,
-  sex: 'male'
+  sex: "male",
 };
 
 printPersonInfo(person);
@@ -984,74 +983,72 @@ console.log(`Factorial of ${num} is ${result}`);
 
 function outer() {
   const outerVar = "I'm from outer function!";
-  
+
   function inner() {
-    console.log(outerVar);  // Accessing the outer variable
+    console.log(outerVar); // Accessing the outer variable
   }
 
   inner();
 }
 
-outer();  // Output: I'm from outer function
+outer(); // Output: I'm from outer function
 
 function rememberMe() {
   const secret = "Hello! I'm a secret!";
-  return function() {
-    console.log(secret);  // This inner function remembers the 'secret'
+  return function () {
+    console.log(secret); // This inner function remembers the 'secret'
   };
 }
 
 const myClosure = rememberMe();
-myClosure();  // Output: I'm a secret!
+myClosure(); // Output: I'm a secret!
 
 function counter() {
   let count = 30;
-  return function() {
+  return function () {
     return ++count;
   };
 }
 
 const increment = counter();
-console.log(increment());  // Output: 1
-console.log(increment());  // Output: 2
-console.log(increment());  // Output: 2
-console.log(increment());  // Output: 2
-
+console.log(increment()); // Output: 1
+console.log(increment()); // Output: 2
+console.log(increment()); // Output: 2
+console.log(increment()); // Output: 2
 
 // (it ran a loop)
 
 function first() {
   console.log("Hello from first!");
-  second(), third();  // Calling another function
+  second(), third(); // Calling another function
 }
 
 function second() {
   console.log("Hello from second!");
 }
 function third() {
-  console.log("Hello from third!")
+  console.log("Hello from third!");
 }
 
-first();  // Output: Hello from first! Hello from second!
+first(); // Output: Hello from first! Hello from second!
 
 function oops() {
-  myVariable = "I'm global!";  // Oops, forgot 'var', 'let', or 'const'!
+  myVariable = "I'm global!"; // Oops, forgot 'var', 'let', or 'const'!
 }
 
 oops();
-console.log(myVariable);  // Output: I'm global!
+console.log(myVariable); // Output: I'm global!
 
 const x = 10;
 const y = 20;
 
 function shadowExample() {
-  const x = 3;  // This 'x' is different from the outer 'x'
-  console.log(x);  // Output: 5
+  const x = 3; // This 'x' is different from the outer 'x'
+  console.log(x); // Output: 5
 }
 
 shadowExample();
-console.log(x);  // Output: 10
-
+console.log(x); // Output: 10
 
 //encapsulation method.
 let baseSalary = 30_000;
@@ -1059,40 +1056,426 @@ let overtime = 10;
 let rate = 20;
 
 function getWage(baseSalary, overTime, rate) {
-  return baseSalary + (overTime * rate);
+  return baseSalary + overTime * rate;
 }
 
 let employee = {
   baseSalary: 30_000,
   overTime: 10,
   rate: 20,
-  getWage: function() {
-    return this.baseSalary + (this.overTime * this.rate);
-  }
+  getWage: function () {
+    return this.baseSalary + this.overTime * this.rate;
+  },
 };
 
 console.log(employee.getWage());
 
 const circle = {
-  radius: 1,
-  location:{
+  radius: 4,
+  location: {
     x: 2,
-    y: 2
+    y: 2,
   },
-  draw: function() {
-    console.log('great');
-  }
+  draw: function () {
+    console.log("great");
+  },
 };
 
 circle.draw();
 
 function outerFunction() {
   function innerFunction() {
-     console.log('Hello from the inner function!');
+    console.log("Hello from the inner function!");
   }
- 
+
   innerFunction();
- }
- 
- outerFunction(); // Output: Hello from the inner function!
+}
+
+outerFunction(); // Output: Hello from the inner function!
+
+const personActions = {
+  getFullName() {
+    return this.firstName + " " + this.lastName;
+  },
+};
+
+function createPerson(firstName, lastName) {
+  let person = Object.create(personActions);
+  person.firstName = firstName;
+  person.lastName = lastName;
+  return person;
+}
+
+let person1 = createPerson("John", "Doe");
+let person2 = createPerson("Jane", "Doe");
+
+console.log(person1.getFullName());
+console.log(person2.getFullName());
+// The output of these two lines should be "John Doe" and "Jane Doe".
+
+//factory Function
+function createRectangle(radius) {
+  return {
+    radius,
+    draw: function () {
+      console.log("draw");
+    },
+  };
+}
+
+const rectangle = createRectangle(1);
+//  circle.draw();
+
+//Constructor function
+function Circle(radius) {
+  this.radius = radius;
+  this.draw = function () {
+    console.log("draw");
+  };
+}
+
+// const Circle1 = new Function('radius', `
+// this.radius = radius;
+// this.draw = function() {
+//   console.log('draw);
+// }
+// `)
+// const circle1 = new Circle1(1);
+
+// circle.call({})
+const another = new Circle(1);
+
+let b = {};
+
+let d = { value: 10 };
+let e = d;
+
+d.value = 20;
+
+console.log(d);
+
+let number = 10;
+
+function increase(number) {
+  number++;
+}
+
+increase(number);
+console.log(number);
+
+let obj = { value: 10 };
+
+function increase(obj) {
+  obj.value++;
+}
+
+increase(obj);
+console.log(obj);
+
+function Triangle(diameter) {
+  this.diameter = diameter;
+  this.area = function () {
+    console.log("area");
+  };
+}
+
+const triangle = new Triangle(10);
+
+triangle.location = { x: 1 };
+
+const propertyName = "center location";
+const typeOf = "glory";
+const hasOwnProperty = 30;
+const isPrototypeOf = true,
+  constructor = false;
+
+triangle[propertyName] = { x: 1 };
+triangle[typeOf] = { c: 6 };
+triangle[hasOwnProperty] = { x: 7 };
+triangle[isPrototypeOf] = { y: 8 };
+triangle[constructor] = { c: x };
+
+delete triangle["location"];
+delete triangle["typeOf"];
+
+for (let key in triangle) {
+  if (typeof triangle[key] !== "function") console.log(key, triangle[key]);
+}
+
+const keys = Object.keys(triangle);
+console.log(keys);
+
+if ("30" in triangle) console.log("The object contains the property 'typeOf'");
+
+// function Trapezium(radius) {
+
+//   this.radius = radius;
+
+//   this.defaultLocation = { x: 0, y: 0 };
+
+// let  computeOptimumLocation = function(factor) {
+//     //...
+//   }
+//   this.draw = function() {
+//     this.computeOptimumLocation(0.2);
+
+//     console.log('draw');
+//   };
+// }
+
+// const trapezium = new Trapezium(10);
+// trapezium.draw();
+
+//private
+// function Square(radius) {
+//   this.radius = radius;
+
+//   let defaultLocation = { x: 0, y:0 };
+
+//   let computeOptimumLocation = function(factor) {
+//     // ...
+//   }
+//   this.draw = function() {
+//     this.computeOptimumLocation(0.1);
+
+//     console.log('draw');
+//   };
+// }
+
+// const square = new Square(10);
+// square.draw();
+
+function Star(radius) {
+  this.radius = radius;
+
+  let defaultLocation = { x: 0, y: 0 };
+
+  this.getDefaultLocation = function () {
+    return defaultLocation;
+  };
+
+  this.draw = function () {
+    console.log("draw");
+  };
+
+  Object.defineProperty(this, "defaultLocation", {
+    get: function () {
+      return defaultLocation;
+    },
+    set: function (value) {
+      if (!value.x || !value.y) throw new Error("Invalid location.");
+
+      defaultLocation = value;
+    },
+  });
+}
+
+const star = new Star(10);
+// circle.getDefaultLocation();
+circle.draw();
+
+// // A class to represent a star
+// function Star(radius) {
+//   // The radius of the star
+//   this.radius = radius;
+
+//   // The default location of the star
+//   let defaultLocation = { x: 0, y: 0 };
+
+//   // A method to get the default location of the star
+//   this.getDefaultLocation = function() {
+//     // Return the default location
+//     return defaultLocation;
+//   };
+
+//   // A method to draw the star
+//   this.draw = function() {
+//     // Log that the star is being drawn
+//     console.log('draw');
+//   };
+
+//   // A getter for the defaultLocation property
+//   Object.defineProperty(this, 'defaultLocation', {
+//     get: function() {
+//       // Return the default location
+//       return defaultLocation;
+//     }
+//   });
+
+function Stopwatch() {
+  let startTime,
+    endTime,
+    running,
+    duration = 0;
+
+  this.start = function () {
+    if (running) throw new Error("Stopwatch already started");
+    running = true;
+  };
+
+  this.stop = function () {
+    if (!running) throw new Error("Stopwatch is not started.");
+    running = false;
+
+    endTime = new Date();
+
+    const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
+    duration += seconds;
+  };
+
+  this.reset = function () {
+    running = false;
+    duration = 0;
+    startTime = null;
+    endTime = null;
+  };
+
+  Object.defineProperty(this, "duration", {
+    get: function () {
+      return duration;
+    },
+  });
+}
+
+let selectedColors = ["red", "blue"];
+selectedColors[2] = "green";
+selectedColors[3] = [2, 7, 5, ["john"]];
+console.log(selectedColors[3]);
+
+function greet(name) {
+  console.log("Hello " + name);
+}
+
+greet("Jessica");
+
+class Player {
+  constructor(name, lives) {
+    this.name = name;
+    this.lives = lives;
+  }
+  die() {
+    if (this.lives === 0) {
+      console.log("Can't die anymore, already dead!!!");
+    } else {
+      this.lives--;
+      console.log(`${this.name} has ${this.lives} left`);
+    }
+  }
+}
+
+const player = new Player("Waffles", 0);
+const player2 = new Player("Pancakes", 3);
+
+player.die();
+
+console.log(player.name, player.lives);
+console.log(player2.name, player2.lives);
+
+// Javascript string method
+
+// "Hello".charAt(4) => o
+// "Hello".concat ('''', "world") => Hello world
+// "Hello".startsWith ("H") => true
+// "Hello".endsWith("o") => true
+// "Hello".includes ("x") => false
+// "Hello".indexOf("") => 2
+// "Hello".lastindexOf("i") =>3
+// "Hello".match(/[A-Z]/g) => [H]
+// "Hello".padStart(6, "?") => ?Hello
+// "Hello".padEnd(6, "?") => Hello?
+// "Hello".repeat(3) => HelloHelloHello
+// "Hello".replace("llo", "y") => Hey
+// "Hello".search("e") => |
+// "Hello".slice(I, 3) => el
+// "Hello".split ('''') => ['H','e', I, T, 'o']
+// "Hello".substring(2, 4) =>II
+// "Hello".toLowerCase() => hello
+// "Hello". toUpperCase() => HELLO
+// " Hello ".trim() => Hello
+// " Hello ".trimStart () => "Hello "
+// " Hello".trimEnd() =>" Hello"
+
+//array reduce *
+const numbers = [1, -1, 2, 3, 4];
+
+// let sum = 0;
+// for (let n of numbers)
+//   sum += n;
+
+//   console.log(sum)
+
+//a = 0, c = 1 => a = 1
+//a = 1, c = -1 => a = 0
+//a = 0, c = 2 => a = 2
+//a = 2, c = 3 => a = 5
+//a = 5, c = 4 => a = 9
+
+// const sum = numbers.reduce((accumulator, currentValue) => {
+//   return accumulator + currentValue;
+// });
+
+//shorter way to write this code
+const sum = numbers.reduce(
+  (accumulator, currentValue) => accumulator + currentValue
+);
+
+console.log(sum);
+
+// const filtered = numbers.filter (n => n >= 0);
+
+// const items = filtered.map(n => '<li>' + n + '</li>')
+
+// const html = '<ul>' + items.join('') + '</ul>';
+
+// console.log(html);
+
+//cleaner code syntax(also called chaining)
+const items = numbers
+  .filter((n) => n >= 0)
+  .map((n) => ({ value: n }))
+  .filter((obj) => obj.value > 1)
+  .map((obj) => obj.value);
+
+console.log(items);
+
+//object destructing in Javascript
+
+const person3 = {
+  name: "Mummy",
+  age: 26,
+  gender: true
+};
+
+let { name, age, gender = "" } = person3;
+
+console.log(name);
+console.log(age);
+console.log(gender);
+
+function printDetails({ name, age }) {
+  console.log(`The name is ${name} he is ${age} years old. `);
+}
+printDetails(person3);
+
+//Array destructing in Javascript
+let numbers2 = [20, 21, 41, 23];
+
+let [one, two, three, four = 33] = numbers2;
+
+console.log(one);
+console.log(two);
+console.log(three);
+console.log(four);
+
+function bottle() {
+  return ["bottle", "water"];
+}
+
+let [red, blue] = bottle();
+
+console.log(red);
+console.log(blue);
+
+
+
 
